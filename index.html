@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join Caramel Mocha's premium adult content platform for exclusive videos, live shows, and more.">
-    <meta name="keywords" content="Caramel Mocha, adult content, premium creators, exclusive videos, live shows">
+    <meta name="description" content="Join Caramel Mocha's premium adult content platform for exclusive videos, live shows, and fan interactions.">
+    <meta name="keywords" content="Caramel Mocha, adult content, premium creators, exclusive videos, live shows, fan interactions">
     <meta name="author" content="Caramel Mocha Promos">
+    <meta name="robots" content="noindex, nofollow">
     <title>Caramel Mocha Promos - Premium Adult Content Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <style>
-        /* CSS Variables */
         :root {
             --primary: #ff2d55;
             --secondary: #ff7ab8;
@@ -21,9 +23,10 @@
             --text-light: #666;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             --gradient: linear-gradient(135deg, #ff2d55 0%, #ff7ab8 100%);
+            --dark-bg: #121212;
+            --dark-text: #e0e0e0;
         }
 
-        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -47,6 +50,29 @@
             color: var(--text);
             line-height: 1.7;
             scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .container,
+        body.dark-mode .creator-card,
+        body.dark-mode .content-card,
+        body.dark-mode .payment-form,
+        body.dark-mode .testimonial-card,
+        body.dark-mode .category-card,
+        body.dark-mode header,
+        body.dark-mode .modal-content,
+        body.dark-mode .payment-method,
+        body.dark-mode .schedule-card,
+        body.dark-mode .fan-card,
+        body.dark-mode .benefit-card,
+        body.dark-mode .age-verification-content {
+            background-color: #1e1e2e;
+            color: var(--dark-text);
         }
 
         a {
@@ -91,7 +117,7 @@
         }
 
         h2 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 48px;
             position: relative;
             font-weight: 700;
@@ -99,6 +125,10 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.3;
         }
 
         h2::after {
@@ -112,7 +142,6 @@
             background: var(--gradient);
         }
 
-        /* Cookie Banner */
         .cookie-banner {
             position: fixed;
             bottom: 20px;
@@ -136,7 +165,37 @@
             padding: 10px 20px;
         }
 
-        /* Header Styles */
+        .age-verification {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .age-verification-content {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .age-verification-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .age-verification-content p {
+            margin-bottom: 20px;
+        }
+
         header {
             background: rgba(255, 255, 255, 0.95);
             box-shadow: var(--shadow);
@@ -164,6 +223,7 @@
         nav {
             display: flex;
             align-items: center;
+            gap: 16px;
         }
 
         nav ul {
@@ -210,6 +270,7 @@
             background: #f0f0f0;
             border-radius: 50px;
             padding: 8px 16px;
+            position: relative;
         }
 
         .search-bar input {
@@ -231,9 +292,41 @@
             color: var(--text-light);
         }
 
-        /* Hero Section */
+        .search-filters {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 16px;
+            z-index: 10;
+        }
+
+        .search-filters.active {
+            display: block;
+        }
+
+        .search-filters label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        body.dark-mode .dark-mode-toggle i::before {
+            content: '\f185';
+        }
+
         .hero {
-            background: var(--gradient), url('assets/images/hero-bg.webp') no-repeat center center/cover;
+            background: var(--gradient), url('https://pbs.twimg.com/media/GvlR227XYAAi6NH?format=jpg&name=large') no-repeat center center/cover;
             color: white;
             text-align: center;
             padding: 160px 0;
@@ -257,26 +350,35 @@
             z-index: 2;
             max-width: 1000px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin-bottom: 24px;
             text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.2;
+            word-break: break-word;
+            font-weight: 800;
         }
 
         .hero p {
             font-size: 1.4rem;
             margin-bottom: 40px;
             opacity: 0.9;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero .btn {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             padding: 16px 32px;
         }
 
-        /* Categories Section */
         .categories {
             background: var(--light);
             text-align: center;
@@ -294,35 +396,62 @@
             border-radius: 12px;
             padding: 24px;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .category-card:hover {
             transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .category-card i {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 16px;
         }
 
         .category-card h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 8px;
         }
 
         .category-card p {
             font-size: 0.9rem;
             color: var(--text-light);
+            margin-bottom: 16px;
         }
 
-        /* Featured Creators */
+        .category-card a.btn {
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card a.btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .category-card a.btn:hover::before {
+            left: 100%;
+        }
+
+        .category-card a.btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
         .creators-carousel {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 32px;
             margin-top: 48px;
         }
 
@@ -341,7 +470,7 @@
 
         .creator-img {
             height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             position: relative;
             overflow: hidden;
         }
@@ -377,28 +506,48 @@
 
         .creator-links {
             display: flex;
-            gap: 12px;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 16px;
         }
 
         .creator-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background: var(--gradient);
             color: white;
             border-radius: 50%;
-            font-size: 1rem;
+            font-size: 1.4rem;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .creator-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .creator-links a:hover::before {
+            left: 100%;
         }
 
         .creator-links a:hover {
-            transform: scale(1.1);
-            background: linear-gradient(135deg, #ff4d7d 0%, #ff99c8 100%);
+            transform: scale(1.15);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
         }
 
-        /* Latest Drops */
         .content-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -419,7 +568,7 @@
 
         .content-thumbnail {
             height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             position: relative;
             overflow: hidden;
         }
@@ -466,7 +615,101 @@
             color: var(--text-light);
         }
 
-        /* Testimonials Section */
+        .live-schedule {
+            background: var(--light);
+            text-align: center;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .schedule-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .schedule-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .schedule-card p {
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .fan-interaction {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+
+        .fan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .fan-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .fan-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .fan-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .membership-benefits {
+            background: var(--light);
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .benefit-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
         .testimonials {
             background: var(--dark);
             color: white;
@@ -474,9 +717,6 @@
         }
 
         .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
             margin-top: 48px;
         }
 
@@ -503,7 +743,6 @@
             font-weight: 600;
         }
 
-        /* Payment Section */
         .payment-section {
             background: var(--light);
             text-align: center;
@@ -563,7 +802,8 @@
             font-size: 1rem;
         }
 
-        .form-group input, .form-group select {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 14px;
             border: 1px solid #e0e0e0;
@@ -572,7 +812,8 @@
             transition: border-color 0.3s ease;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus,
+        .form-group select:focus {
             outline: none;
             border-color: var(--primary);
         }
@@ -607,7 +848,6 @@
             color: var(--accent);
         }
 
-        /* Subscribe Section */
         .subscribe {
             background: var(--dark);
             color: white;
@@ -652,7 +892,6 @@
             font-weight: 600;
         }
 
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -700,6 +939,7 @@
             overflow: hidden;
         }
 
+        .modal-video-container video,
         .modal-video-container iframe {
             position: absolute;
             top: 0;
@@ -708,7 +948,6 @@
             height: 100%;
         }
 
-        /* Footer */
         footer {
             background: var(--dark);
             color: white;
@@ -719,18 +958,42 @@
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 32px;
+            gap: 40px;
             margin-bottom: 24px;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
-            font-size: 1rem;
+            font-size: 1.2rem;
             opacity: 0.8;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .footer-links a:hover::before {
+            left: 100%;
         }
 
         .footer-links a:hover {
             opacity: 1;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: scale(1.1);
         }
 
         .copyright {
@@ -738,7 +1001,6 @@
             opacity: 0.7;
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -750,7 +1012,6 @@
             animation-delay: 0.2s;
         }
 
-        /* Loading Spinner */
         .loading-spinner {
             display: none;
             width: 40px;
@@ -767,7 +1028,46 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Responsive */
+        .slick-prev, .slick-next {
+            font-size: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .slick-prev:before, .slick-next:before {
+            font-family: 'FontAwesome';
+            font-size: 20px;
+            color: white;
+        }
+
+        .slick-prev:before {
+            content: '\f053';
+        }
+
+        .slick-next:before {
+            content: '\f054';
+        }
+
+        .slick-prev {
+            left: -50px;
+        }
+
+        .slick-next {
+            right: -50px;
+        }
+
+        .slick-dots li button:before {
+            font-size: 12px;
+            color: var(--primary);
+        }
+
+        .slick-dots li.slick-active button:before {
+            color: var(--accent);
+        }
+
         @media (max-width: 768px) {
             .header-container {
                 flex-wrap: wrap;
@@ -815,15 +1115,22 @@
 
             .hero {
                 padding: 60px 0;
-                background: var(--gradient), url('assets/images/hero-bg-mobile.webp') no-repeat center center/cover;
+                background: var(--gradient), url('https://pbs.twimg.com/media/GvlR227XYAAi6NH?format=jpg&name=large') no-repeat center center/cover;
             }
 
             .hero h1 {
                 font-size: 3rem;
+                max-width: 95%;
             }
 
             .hero p {
                 font-size: 1.2rem;
+                max-width: 90%;
+            }
+
+            h2 {
+                font-size: 2.4rem;
+                max-width: 95%;
             }
 
             .subscribe-form {
@@ -849,6 +1156,46 @@
                 width: 100%;
                 max-width: 300px;
             }
+
+            .creator-links {
+                gap: 15px;
+            }
+
+            .creator-links a {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+
+            .footer-links {
+                gap: 20px;
+            }
+
+            .footer-links a {
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
+
+            .category-card i {
+                font-size: 2rem;
+            }
+
+            .category-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .category-card a.btn {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+
+            .slick-prev {
+                left: 10px;
+            }
+
+            .slick-next {
+                right: 10px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -857,19 +1204,23 @@
             }
 
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
+                max-width: 100%;
             }
 
             .hero p {
-                font-size: 0.9rem;
+                font-size: 1rem;
+                max-width: 100%;
             }
 
             h2 {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
+                max-width: 100%;
             }
 
-            .creator-img, .content-thumbnail {
-                padding-bottom: 75%; /* 4:3 aspect ratio for mobile */
+            .creator-img,
+            .content-thumbnail {
+                padding-bottom: 75%;
             }
 
             .cookie-banner {
@@ -895,17 +1246,56 @@
             .search-bar {
                 max-width: 100%;
             }
+
+            .creator-links {
+                gap: 10px;
+            }
+
+            .creator-links a {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .footer-links {
+                gap: 15px;
+            }
+
+            .footer-links a {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+
+            .category-card i {
+                font-size: 1.8rem;
+            }
+
+            .category-card h3 {
+                font-size: 1rem;
+            }
+
+            .category-card a.btn {
+                font-size: 0.7rem;
+                padding: 6px 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Cookie Consent Banner -->
+    <div id="ageVerification" class="age-verification">
+        <div class="age-verification-content">
+            <h2>Age Verification</h2>
+            <p>You must be 18 or older to access this website. By continuing, you confirm that you are 18 or older.</p>
+            <button id="verifyAge" class="btn" aria-label="Confirm age">I am 18 or older</button>
+            <button id="exitAge" class="btn" style="background: #666;" aria-label="Exit">Exit</button>
+        </div>
+    </div>
+
     <div id="cookieBanner" class="cookie-banner">
-        <p>We use cookies to enhance your experience. <a href="#privacy">Learn more</a>.</p>
+        <p>We use cookies to enhance your experience. <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Learn more</a>.</p>
         <button id="acceptCookies" class="btn" aria-label="Accept cookies">Accept</button>
     </div>
 
-    <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">Caramel<span>Mocha</span></div>
@@ -917,65 +1307,78 @@
                     <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="#featured"><i class="fas fa-fire"></i> Featured</a></li>
                     <li><a href="#latest"><i class="fas fa-video"></i> Latest Drops</a></li>
+                    <li><a href="#live-schedule"><i class="fas fa-calendar"></i> Live Shows</a></li>
+                    <li><a href="#fan-interaction"><i class="fas fa-users"></i> Fan Zone</a></li>
                     <li><a href="#payment"><i class="fas fa-money-bill-wave"></i> Payment</a></li>
                     <li><a href="#subscribe"><i class="fas fa-envelope"></i> Subscribe</a></li>
                     <li><a href="#login"><i class="fas fa-user"></i> Login</a></li>
                 </ul>
+                <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
             </nav>
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Search creators or content..." aria-label="Search creators or content">
+                <button type="button" id="filterToggle" aria-label="Toggle search filters"><i class="fas fa-filter"></i></button>
                 <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                <div class="search-filters" id="searchFilters">
+                    <label><input type="checkbox" name="category" value="hot-picks"> Hot Picks</label>
+                    <label><input type="checkbox" name="category" value="exclusive"> Exclusive</label>
+                    <label><input type="checkbox" name="category" value="live-shows"> Live Shows</label>
+                    <label><input type="checkbox" name="category" value="fan-favorites"> Fan Favorites</label>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content animate-on-scroll">
             <h1>Unlock Exclusive Adult Entertainment</h1>
-            <p>Join Caramel Mocha's premium platform to access uncensored content from top creators worldwide.</p>
+            <p>Join Caramel Mocha's premium platform for uncensored content, live shows, and fan interactions.</p>
             <a href="#featured" class="btn">Discover Caramel Mocha</a>
         </div>
     </section>
 
-    <!-- Categories Section -->
     <section id="categories" class="categories">
         <div class="container">
-            <h2>Trending Categories</h2>
+            <h2>Connect with Caramel Mocha</h2>
             <div class="category-grid">
                 <div class="category-card animate-on-scroll">
-                    <i class="fas fa-fire"></i>
-                    <h3>Hot Picks</h3>
-                    <p>Explore the most popular content right now.</p>
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Fanvue</h3>
+                    <p>Explore Caramel Mocha's exclusive content on Fanvue.</p>
+                    <a href="https://fanvue.com/therealcm" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Visit Fanvue">Visit Fanvue</a>
                 </div>
                 <div class="category-card animate-on-scroll">
                     <i class="fas fa-star"></i>
-                    <h3>Exclusive</h3>
-                    <p>Premium content you won't find anywhere else.</p>
+                    <h3>Youfanly</h3>
+                    <p>Discover premium videos and updates on Youfanly.</p>
+                    <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Visit Youfanly">Visit Youfanly</a>
                 </div>
                 <div class="category-card animate-on-scroll">
-                    <i class="fas fa-video"></i>
-                    <h3>Live Shows</h3>
-                    <p>Interact with creators in real-time.</p>
+                    <i class="fas fa-camera"></i>
+                    <h3>Finsta</h3>
+                    <p>Follow Caramel Mocha's behind-the-scenes on Finsta.</p>
+                    <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Visit Finsta">Visit Finsta</a>
                 </div>
                 <div class="category-card animate-on-scroll">
                     <i class="fas fa-heart"></i>
-                    <h3>Fan Favorites</h3>
-                    <p>Content loved by our community.</p>
+                    <h3>Twitter</h3>
+                    <p>Follow Caramel Mocha's teasers on X.</p>
+                    <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Visit X">Visit X</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Creators -->
     <section id="featured" class="container">
         <h2>Top Creators</h2>
         <div class="creators-carousel">
-            <div class="creator-card animate-on-scroll">
+            <div class="creator-card animate-on-scroll" data-category="hot-picks">
                 <div class="creator-img">
                     <picture>
-                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/media/GyKQHVvWkAEM2dZ?format=jpg&name=small">
-                        <img src="https://pbs.twimg.com/media/GyKQHVvWkAEM2dZ?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
+                        <source media="(max-width: 480px)" srcset="https://x.com/caramellmocha69/status/1942587330361237921/video/1">
+                        <img src="https://pbs.twimg.com/media/GyKQHV2X0AA00c3?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
                     </picture>
                 </div>
                 <div class="creator-info">
@@ -986,14 +1389,14 @@
                         <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Youfanly" aria-label="Visit Youfanly"><i class="fas fa-star"></i></a>
                         <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Finsta" aria-label="Visit Finsta"><i class="fas fa-camera"></i></a>
                         <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Twitter" aria-label="Visit Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="preview-btn" data-video="https://x.com/caramellmocha69/status/1959342747002753139/video/1" title="Preview" aria-label="Preview video"><i class="fas fa-play"></i></a>
+                        <a href="#" class="preview-btn" data-video="https://example.com/videos/creator1-preview.mp4" title="Preview" aria-label="Preview video"><i class="fas fa-play"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="creator-card animate-on-scroll">
+            <div class="creator-card animate-on-scroll" data-category="exclusive">
                 <div class="creator-img">
                     <picture>
-                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/media/GyKQHVrWgAAhMHe?format=jpg&name=small">
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Creator+2+Mobile">
                         <img src="https://pbs.twimg.com/media/GyKQHVrWgAAhMHe?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
                     </picture>
                 </div>
@@ -1005,15 +1408,15 @@
                         <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Youfanly" aria-label="Visit Youfanly"><i class="fas fa-star"></i></a>
                         <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Finsta" aria-label="Visit Finsta"><i class="fas fa-camera"></i></a>
                         <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Twitter" aria-label="Visit Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="preview-btn" data-video="https://x.com/caramellmocha69/status/1930306048134348857/video/1" title="Preview" aria-label="Preview video"><i class="fas fa-play"></i></a>
+                        <a href="#" class="preview-btn" data-video="https://example.com/videos/creator2-preview.mp4" title="Preview" aria-label="Preview video"><i class="fas fa-play"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="creator-card animate-on-scroll">
+            <div class="creator-card animate-on-scroll" data-category="live-shows">
                 <div class="creator-img">
                     <picture>
-                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/media/GyKQHV2X0AA00c3?format=jpg&name=small">
-                        <img src="https://pbs.twimg.com/media/GyKQHV2X0AA00c3?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Creator+3+Mobile">
+                        <img src="https://pbs.twimg.com/media/GyKQHVvWkAEM2dZ?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
                     </picture>
                 </div>
                 <div class="creator-info">
@@ -1024,21 +1427,20 @@
                         <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Youfanly" aria-label="Visit Youfanly"><i class="fas fa-star"></i></a>
                         <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Finsta" aria-label="Visit Finsta"><i class="fas fa-camera"></i></a>
                         <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Twitter" aria-label="Visit Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="preview-btn" data-video="https://x.com/caramellmocha69/status/1942584867985973491/video/1" title="Preview" aria-label="Preview video"><i class="fas fa-play"></i></a>
+                        <a href="#" class="preview-btn" data-video="https://example.com/videos/creator3-preview.mp4" title="Preview" aria-label="Preview video"><i class="fas fa-play"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Latest Drops -->
     <section id="latest" class="container">
         <h2>Latest Releases</h2>
         <div class="content-grid">
-            <div class="content-card animate-on-scroll">
+            <div class="content-card animate-on-scroll" data-category="hot-picks">
                 <div class="content-thumbnail">
                     <picture>
-                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/media/GzAytXfXMAEXk89?format=jpg&name=small">
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Release+1+Mobile">
                         <img src="https://pbs.twimg.com/media/GzAytXfXMAEXk89?format=jpg&name=medium" alt="Caramel Mocha's New Release" loading="lazy">
                     </picture>
                 </div>
@@ -1046,14 +1448,14 @@
                     <h3>Caramel Mocha's Exclusive New Release</h3>
                     <div class="content-meta">
                         <span>2 hours ago</span>
-                        <a href="#" class="btn" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="btn preview-btn" data-video="https://example.com/videos/release1.mp4" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="content-card animate-on-scroll">
+            <div class="content-card animate-on-scroll" data-category="live-shows">
                 <div class="content-thumbnail">
                     <picture>
-                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/amplify_video_thumb/1949481705305214976/img/fh6Bm_Nu2uIJTN50?format=jpg&name=small">
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Release+2+Mobile">
                         <img src="https://pbs.twimg.com/amplify_video_thumb/1949481705305214976/img/fh6Bm_Nu2uIJTN50?format=jpg&name=360x360" alt="Caramel Mocha's Live Show" loading="lazy">
                     </picture>
                 </div>
@@ -1061,14 +1463,89 @@
                     <h3>Caramel Mocha's Live Show Recap</h3>
                     <div class="content-meta">
                         <span>4 hours ago</span>
-                        <a href="#" class="btn" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="btn preview-btn" data-video="https://example.com/videos/release2.mp4" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="content-card animate-on-scroll">
+            <div class="content-card animate-on-scroll" data-category="exclusive">
                 <div class="content-thumbnail">
                     <picture>
-                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/amplify_video_thumb/1944128677387583489/img/_E30Ur8iQkJrPfhW?format=jpg&name=small">
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Release+3+Mobile">
+                        <img src="https://pbs.twimg.com/amplify_video_thumb/1947671059865407488/img/mfMjM512GKBQzTH5?format=jpg&name=360x360" alt="Caramel Mocha's BTS" loading="lazy">
+                    </picture>
+                </div>
+                <div class="content-details">
+                    <h3>Caramel Mocha's Behind-the-Scenes</h3>
+                    <div class="content-meta">
+                        <span>1 day ago</span>
+                        <a href="#" class="btn preview-btn" data-video="https://example.com/videos/release3.mp4" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+			<div class="content-card animate-on-scroll" data-category="exclusive">
+                <div class="content-thumbnail">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Release+3+Mobile">
+                        <img src="https://pbs.twimg.com/media/GsslfDoWYAAYjTo?format=jpg&name=large" alt="Caramel Mocha's BTS" loading="lazy">
+                    </picture>
+                </div>
+                <div class="content-details">
+                    <h3>Caramel Mocha's Behind-the-Scenes</h3>
+                    <div class="content-meta">
+                        <span>1 day ago</span>
+                        <a href="#" class="btn preview-btn" data-video="https://example.com/videos/release3.mp4" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+			<div class="content-card animate-on-scroll" data-category="exclusive">
+                <div class="content-thumbnail">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Release+3+Mobile">
+                        <img src="https://pbs.twimg.com/media/GsngXO9WoAAngOJ?format=jpg&name=large" alt="Caramel Mocha's BTS" loading="lazy">
+                    </picture>
+                </div>
+                <div class="content-details">
+                    <h3>Caramel Mocha's Behind-the-Scenes</h3>
+                    <div class="content-meta">
+                        <span>1 day ago</span>
+                        <a href="#" class="btn preview-btn" data-video="https://example.com/videos/release3.mp4" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+			<div class="content-card animate-on-scroll" data-category="exclusive">
+                <div class="content-thumbnail">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Release+3+Mobile">
+                        <img src="https://pbs.twimg.com/amplify_video_thumb/1930305989493858304/img/97pt3hQ2yuZNWAtV?format=jpg&name=360x360" alt="Caramel Mocha's BTS" loading="lazy">
+                    </picture>
+                </div>
+                <div class="content-details">
+                    <h3>Caramel Mocha's Behind-the-Scenes</h3>
+                    <div class="content-meta">
+                        <span>1 day ago</span>
+                        <a href="#" class="btn preview-btn" data-video="https://example.com/videos/release3.mp4" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+			<div class="content-card animate-on-scroll" data-category="exclusive">
+                <div class="content-thumbnail">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Release+3+Mobile">
+                        <img src="https://pbs.twimg.com/amplify_video_thumb/1940069891484114944/img/5iVBiBBISdimBmeE?format=jpg&name=360x360" alt="Caramel Mocha's BTS" loading="lazy">
+                    </picture>
+                </div>
+                <div class="content-details">
+                    <h3>Caramel Mocha's Behind-the-Scenes</h3>
+                    <div class="content-meta">
+                        <span>1 day ago</span>
+                        <a href="#" class="btn preview-btn" data-video="https://example.com/videos/release3.mp4" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+			<div class="content-card animate-on-scroll" data-category="exclusive">
+                <div class="content-thumbnail">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://via.placeholder.com/300x169?text=Release+3+Mobile">
                         <img src="https://pbs.twimg.com/amplify_video_thumb/1944128677387583489/img/_E30Ur8iQkJrPfhW?format=jpg&name=360x360" alt="Caramel Mocha's BTS" loading="lazy">
                     </picture>
                 </div>
@@ -1076,35 +1553,110 @@
                     <h3>Caramel Mocha's Behind-the-Scenes</h3>
                     <div class="content-meta">
                         <span>1 day ago</span>
-                        <a href="#" class="btn" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="btn preview-btn" data-video="https://example.com/videos/release3.mp4" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <section id="live-schedule" class="live-schedule">
+        <div class="container">
+            <h2>Live Shows Schedule</h2>
+            <div class="schedule-grid">
+                <div class="schedule-card animate-on-scroll">
+                    <h3>Caramel Mocha Live</h3>
+                    <p><i class="fas fa-calendar-alt"></i> August 25, 2025, 8:00 PM GMT</p>
+                    <p><i class="fas fa-video"></i> Exclusive Q&A and Performance</p>
+                    <a href="#payment" class="btn">Reserve Your Spot</a>
+                </div>
+                <div class="schedule-card animate-on-scroll">
+                    <h3>Fan Interaction Special</h3>
+                    <p><i class="fas fa-calendar-alt"></i> August 27, 2025, 9:00 PM GMT</p>
+                    <p><i class="fas fa-users"></i> Live Chat with Fans</p>
+                    <a href="#payment" class="btn">Join Now</a>
+                </div>
+                <div class="schedule-card animate-on-scroll">
+                    <h3>Behind-the-Scenes Stream</h3>
+                    <p><i class="fas fa-calendar-alt"></i> August 30, 2025, 7:00 PM GMT</p>
+                    <p><i class="fas fa-camera"></i> Exclusive BTS Content</p>
+                    <a href="#payment" class="btn">Get Access</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fan-interaction" class="fan-interaction">
+        <div class="container">
+            <h2>Fan Zone</h2>
+            <p>Engage with Caramel Mocha through exclusive fan interactions!</p>
+            <div class="fan-grid">
+                <div class="fan-card animate-on-scroll">
+                    <i class="fas fa-comment"></i>
+                    <h3>Live Chat</h3>
+                    <p>Join live chat sessions to interact directly with Caramel Mocha.</p>
+                    <a href="#live-schedule" class="btn">Join Now</a>
+                </div>
+                <div class="fan-card animate-on-scroll">
+                    <i class="fas fa-gift"></i>
+                    <h3>Fan Rewards</h3>
+                    <p>Earn points for engaging and redeem for exclusive content.</p>
+                    <a href="#subscribe" class="btn">Learn More</a>
+                </div>
+                <div class="fan-card animate-on-scroll">
+                    <i class="fas fa-poll"></i>
+                    <h3>Fan Polls</h3>
+                    <p>Vote on upcoming content themes and live show ideas.</p>
+                    <a href="#subscribe" class="btn">Vote Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="membership-benefits" class="membership-benefits">
+        <div class="container">
+            <h2>Premium Membership Benefits</h2>
+            <p>Unlock exclusive perks with a Caramel Mocha membership.</p>
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-lock-open"></i>
+                    <h3>Exclusive Content</h3>
+                    <p>Access uncensored videos and photos available only to members.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-video"></i>
+                    <h3>Priority Live Shows</h3>
+                    <p>Get front-row access to live shows and Q&A sessions.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-gift"></i>
+                    <h3>Special Discounts</h3>
+                    <p>Enjoy discounts on merchandise and premium content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="testimonials" class="testimonials">
         <div class="container">
             <h2>What Our Users Say</h2>
             <div class="testimonial-grid">
                 <div class="testimonial-card animate-on-scroll">
-                    <p>"Caramel Mocha has the best exclusive content! The creators are amazing, and the platform is so easy to use."</p>
+                    <p>"Caramel Mocha has the best exclusive content! The platform is sleek and professional."</p>
                     <h4>— Alex J.</h4>
                 </div>
                 <div class="testimonial-card animate-on-scroll">
-                    <p>"I love the variety of content and the secure payment options. It's worth every penny!"</p>
+                    <p>"The live shows and fan interactions make this platform stand out!"</p>
                     <h4>— Sarah M.</h4>
                 </div>
                 <div class="testimonial-card animate-on-scroll">
-                    <p>"The live shows are a game-changer. I feel so connected to my favorite creators."</p>
+                    <p>"Secure payments and a user-friendly interface. Highly recommend!"</p>
                     <h4>— Mike T.</h4>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Payment Section -->
     <section id="payment" class="payment-section">
         <div class="container">
             <h2>Secure Payment Options</h2>
@@ -1140,11 +1692,11 @@
                     </div>
                     <div class="form-group mobile-payment">
                         <label for="phoneNumber">Phone Number</label>
-                        <input type="tel" id="phoneNumber" placeholder="e.g. 0244123456" aria-label="Phone number for payment">
+                        <input type="tel" id="phoneNumber" placeholder="e.g. 0244123456" pattern="\d{10}" aria-label="Phone number for payment">
                     </div>
                     <div class="form-group">
                         <label for="amount">Amount (GHS)</label>
-                        <input type="number" id="amount" placeholder="e.g. 50" min="5" required aria-label="Payment amount in GHS">
+                        <input type="number" id="amount" placeholder="e.g. 50" min="5" step="0.01" required aria-label="Payment amount in GHS">
                     </div>
                     <div class="bitcoin-details" id="bitcoinDetails">
                         <p>Send Bitcoin to the address below (Note: Use a secure, dynamic address in production):</p>
@@ -1159,7 +1711,6 @@
         </div>
     </section>
 
-    <!-- Subscribe Section -->
     <section id="subscribe" class="subscribe">
         <div class="container">
             <h2>Stay Updated with New Releases</h2>
@@ -1172,18 +1723,19 @@
         </div>
     </section>
 
-    <!-- Preview Modal -->
     <div class="modal" id="previewModal" role="dialog" aria-labelledby="modalTitle" tabindex="0">
         <div class="modal-content">
             <span class="close-modal" aria-label="Close modal">&times;</span>
             <div class="modal-video-container">
-                <iframe id="modalIframe" src="" frameborder="0" allowfullscreen aria-label="Preview video"></iframe>
+                <video id="modalVideo" controls aria-label="Preview video">
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
                 <p id="modalError" style="display: none; color: red; text-align: center;">Failed to load video. Please try again.</p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-links">
@@ -1191,26 +1743,60 @@
                 <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" aria-label="Visit Youfanly"><i class="fas fa-star"></i> Youfanly</a>
                 <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" aria-label="Visit Finsta"><i class="fas fa-camera"></i> Finsta</a>
                 <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" aria-label="Visit Twitter"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="#" aria-label="Terms">Terms</a>
-                <a href="#" aria-label="Privacy">Privacy</a>
-                <a href="#" aria-label="DMCA">DMCA</a>
-                <a href="#" aria-label="2257">2257</a>
-                <a href="#" aria-label="Contact">Contact</a>
+                <a href="/terms" aria-label="Terms">Terms</a>
+                <a href="/privacy-policy" aria-label="Privacy">Privacy</a>
+                <a href="/dmca" aria-label="DMCA">DMCA</a>
+                <a href="/2257" aria-label="2257">2257</a>
+                <a href="/contact" aria-label="Contact">Contact</a>
             </div>
             <p class="copyright">© 2025 Caramel Mocha Promos. All rights reserved. 18+ only.</p>
         </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
+        // Age Verification
+        const ageVerification = document.getElementById('ageVerification');
+        const verifyAge = document.getElementById('verifyAge');
+        const exitAge = document.getElementById('exitAge');
+
+        if (!localStorage.getItem('ageVerified')) {
+            ageVerification.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        verifyAge.addEventListener('click', () => {
+            localStorage.setItem('ageVerified', 'true');
+            ageVerification.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        exitAge.addEventListener('click', () => {
+            window.location.href = 'https://www.google.com';
+        });
+
         // Cookie Consent
         const cookieBanner = document.getElementById('cookieBanner');
         const acceptCookies = document.getElementById('acceptCookies');
-        if (cookieBanner) {
+        if (cookieBanner && !localStorage.getItem('cookiesAccepted')) {
+            cookieBanner.style.display = 'flex';
             acceptCookies.addEventListener('click', () => {
                 cookieBanner.style.display = 'none';
-                // In production, set a cookie to remember user consent
+                localStorage.setItem('cookiesAccepted', 'true');
             });
+        }
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
         }
 
         // Mobile Menu Toggle
@@ -1225,7 +1811,6 @@
             hamburger.innerHTML = isExpanded ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
         });
 
-        // Close menu when a link is clicked
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
@@ -1234,7 +1819,6 @@
             });
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
@@ -1243,10 +1827,17 @@
             }
         });
 
+        // Search Filters
+        const filterToggle = document.getElementById('filterToggle');
+        const searchFilters = document.getElementById('searchFilters');
+        filterToggle.addEventListener('click', () => {
+            searchFilters.classList.toggle('active');
+        });
+
         // Preview Modal
         const previewBtns = document.querySelectorAll('.preview-btn');
         const modal = document.getElementById('previewModal');
-        const modalIframe = document.getElementById('modalIframe');
+        const modalVideo = document.getElementById('modalVideo');
         const modalError = document.getElementById('modalError');
         const closeModal = document.querySelector('.close-modal');
 
@@ -1254,28 +1845,22 @@
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const videoSrc = btn.getAttribute('data-video');
-                console.log('Attempting to load video:', videoSrc);
-                try {
-                    const postId = videoSrc.match(/status\/(\d+)/)[1];
-                    const embedSrc = `https://twitframe.com/show?url=https%3A%2F%2Fx.com%2Fcaramellmocha69%2Fstatus%2F${postId}`;
-                    modalIframe.src = embedSrc;
-                    modalError.style.display = 'none';
-                    modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                    modal.focus(); // Improve accessibility
-                } catch (error) {
-                    console.error('Error loading video:', error);
+                modalVideo.querySelector('source').src = videoSrc;
+                modalVideo.load();
+                modalError.style.display = 'none';
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                modal.focus();
+                modalVideo.play().catch(() => {
                     modalError.style.display = 'block';
-                    modalIframe.src = '';
-                    modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                }
+                });
             });
         });
 
         closeModal.addEventListener('click', () => {
             modal.style.display = 'none';
-            modalIframe.src = '';
+            modalVideo.querySelector('source').src = '';
+            modalVideo.load();
             modalError.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
@@ -1283,17 +1868,18 @@
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
-                modalIframe.src = '';
+                modalVideo.querySelector('source').src = '';
+                modalVideo.load();
                 modalError.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
 
-        // Keyboard Accessibility for Modal
         modal.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 modal.style.display = 'none';
-                modalIframe.src = '';
+                modalVideo.querySelector('source').src = '';
+                modalVideo.load();
                 modalError.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
@@ -1309,7 +1895,6 @@
         const qrCodeContainer = document.getElementById('bitcoinQR');
         const loadingSpinner = document.getElementById('loadingSpinner');
 
-        // Initialize QR Code (Note: Replace with dynamic address in production)
         const walletAddress = 'bc1qexampleaddresshere1234567890';
         new QRCode(qrCodeContainer, {
             text: `bitcoin:${walletAddress}`,
@@ -1354,7 +1939,7 @@
             }
 
             loadingSpinner.style.display = 'block';
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate async processing
+            await new Promise(resolve => setTimeout(resolve, 1000));
             loadingSpinner.style.display = 'none';
 
             if (paymentMethod === 'bitcoin') {
@@ -1368,22 +1953,82 @@
             phoneNumberInput.style.display = 'block';
         });
 
-        // Search Functionality
+        // Search Functionality with Filters
         const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', () => {
+        const categoryFilters = document.querySelectorAll('input[name="category"]');
+        searchInput.addEventListener('input', filterContent);
+        categoryFilters.forEach(filter => filter.addEventListener('change', filterContent));
+
+        function filterContent() {
             const query = searchInput.value.toLowerCase();
+            const selectedCategories = Array.from(categoryFilters)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
             const creatorCards = document.querySelectorAll('.creator-card');
             const contentCards = document.querySelectorAll('.content-card');
 
             creatorCards.forEach(card => {
                 const name = card.querySelector('h3').textContent.toLowerCase();
-                card.style.display = name.includes(query) ? 'block' : 'none';
+                const category = card.getAttribute('data-category') || 'hot-picks';
+                const matchesQuery = name.includes(query);
+                const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(category);
+                card.style.display = matchesQuery && matchesCategory ? 'block' : 'none';
             });
 
             contentCards.forEach(card => {
                 const title = card.querySelector('h3').textContent.toLowerCase();
-                card.style.display = title.includes(query) ? 'block' : 'none';
+                const category = card.getAttribute('data-category') || 'hot-picks';
+                const matchesQuery = title.includes(query);
+                const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(category);
+                card.style.display = matchesQuery && matchesCategory ? 'block' : 'none';
             });
+        }
+
+        // Initialize Slick Carousel
+        $('.creators-carousel').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            dots: true,
+            arrows: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+
+        $('.testimonial-grid').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 7000,
+            dots: true,
+            arrows: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
         });
 
         // Scroll Animation
