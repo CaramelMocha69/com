@@ -161,6 +161,11 @@
             -webkit-text-fill-color: transparent;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -179,6 +184,24 @@
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text);
+            background: none;
+            border: none;
+            padding: 10px;
+        }
+
+        .nav-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-menu.active {
+            transform: translateX(0);
         }
 
         .search-bar {
@@ -747,15 +770,37 @@
         /* Responsive */
         @media (max-width: 768px) {
             .header-container {
-                flex-direction: column;
+                flex-wrap: wrap;
                 gap: 16px;
                 padding: 10px 0;
             }
 
+            .hamburger {
+                display: block;
+            }
+
             nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 16px;
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 20px;
+                box-shadow: var(--shadow);
+                z-index: 999;
+                transform: translateX(-100%);
+            }
+
+            nav ul.active {
+                display: flex;
+                transform: translateX(0);
+            }
+
+            nav ul li {
+                margin: 10px 0;
             }
 
             .search-bar {
@@ -844,9 +889,7 @@
             }
 
             nav ul {
-                gap: 8px;
-                flex-direction: column;
-                align-items: center;
+                padding: 15px;
             }
 
             .search-bar {
@@ -866,12 +909,11 @@
     <header>
         <div class="container header-container">
             <div class="logo">Caramel<span>Mocha</span></div>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search creators or content..." aria-label="Search creators or content">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
-            </div>
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
             <nav aria-label="Main navigation">
-                <ul>
+                <ul class="nav-menu">
                     <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="#featured"><i class="fas fa-fire"></i> Featured</a></li>
                     <li><a href="#latest"><i class="fas fa-video"></i> Latest Drops</a></li>
@@ -880,6 +922,10 @@
                     <li><a href="#login"><i class="fas fa-user"></i> Login</a></li>
                 </ul>
             </nav>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search creators or content..." aria-label="Search creators or content">
+                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+            </div>
         </div>
     </header>
 
@@ -1166,6 +1212,36 @@
                 // In production, set a cookie to remember user consent
             });
         }
+
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        hamburger.addEventListener('click', () => {
+            const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = isExpanded ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+        });
+
+        // Close menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
 
         // Preview Modal
         const previewBtns = document.querySelectorAll('.preview-btn');
