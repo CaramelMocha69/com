@@ -31,11 +31,21 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
         body {
             background-color: var(--light);
             color: var(--text);
             line-height: 1.7;
-            overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
@@ -200,7 +210,7 @@
 
         /* Hero Section */
         .hero {
-            background: var(--gradient), url('https://pbs.twimg.com/media/GweLjR3WIAArcXv?format=jpg&name=360x360') no-repeat center center/cover;
+            background: var(--gradient), url('assets/images/hero-bg.webp') no-repeat center center/cover;
             color: white;
             text-align: center;
             padding: 160px 0;
@@ -307,20 +317,23 @@
         }
 
         .creator-img {
-            height: 300px;
-            overflow: hidden;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
             position: relative;
+            overflow: hidden;
         }
 
-        .creator-img img, .creator-img video {
+        .creator-img picture img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .creator-card:hover .creator-img img,
-        .creator-card:hover .creator-img video {
+        .creator-card:hover .creator-img img {
             transform: scale(1.05);
         }
 
@@ -382,16 +395,19 @@
         }
 
         .content-thumbnail {
-            height: 220px;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
             position: relative;
             overflow: hidden;
         }
 
-        .content-thumbnail img, .content-thumbnail video {
+        .content-thumbnail picture img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            loading: lazy;
         }
 
         .content-thumbnail::after {
@@ -661,7 +677,7 @@
             overflow: hidden;
         }
 
-        .modal-video-container video {
+        .modal-video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -733,6 +749,7 @@
             .header-container {
                 flex-direction: column;
                 gap: 16px;
+                padding: 10px 0;
             }
 
             nav ul {
@@ -744,6 +761,16 @@
             .search-bar {
                 width: 100%;
                 max-width: 300px;
+                padding: 6px 12px;
+            }
+
+            .search-bar input {
+                width: 100%;
+            }
+
+            .hero {
+                padding: 60px 0;
+                background: var(--gradient), url('assets/images/hero-bg-mobile.webp') no-repeat center center/cover;
             }
 
             .hero h1 {
@@ -781,27 +808,49 @@
 
         @media (max-width: 480px) {
             .hero {
-                padding: 100px 0;
+                padding: 60px 0;
             }
 
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
             }
 
             .hero p {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
 
             h2 {
                 font-size: 2.2rem;
             }
 
-            .creator-img {
-                height: 220px;
+            .creator-img, .content-thumbnail {
+                padding-bottom: 75%; /* 4:3 aspect ratio for mobile */
             }
 
-            .content-thumbnail {
-                height: 180px;
+            .cookie-banner {
+                padding: 15px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .cookie-banner p {
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            .cookie-banner .btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            nav ul {
+                gap: 8px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-bar {
+                max-width: 100%;
             }
         }
     </style>
@@ -810,7 +859,7 @@
     <!-- Cookie Consent Banner -->
     <div id="cookieBanner" class="cookie-banner">
         <p>We use cookies to enhance your experience. <a href="#privacy">Learn more</a>.</p>
-        <button id="acceptCookies" class="btn">Accept</button>
+        <button id="acceptCookies" class="btn" aria-label="Accept cookies">Accept</button>
     </div>
 
     <!-- Header -->
@@ -878,49 +927,58 @@
         <div class="creators-carousel">
             <div class="creator-card animate-on-scroll">
                 <div class="creator-img">
-                    <img src="https://pbs.twimg.com/media/GyKQHVvWkAEM2dZ?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/media/GyKQHVvWkAEM2dZ?format=jpg&name=small">
+                        <img src="https://pbs.twimg.com/media/GyKQHVvWkAEM2dZ?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
+                    </picture>
                 </div>
                 <div class="creator-info">
                     <h3>Caramel Mocha</h3>
                     <p>Exclusive live sessions and premium content.</p>
                     <div class="creator-links">
-                        <a href="https://fanvue.com/therealcm" target="_blank" rel="noopener noreferrer" title="Fanvue"><i class="fas fa-user-circle"></i></a>
-                        <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Youfanly"><i class="fas fa-star"></i></a>
-                        <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Finsta"><i class="fas fa-camera"></i></a>
-                        <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="preview-btn" data-video="https://x.com/caramellmocha69/status/1959342747002753139/video/1" title="Preview"><i class="fas fa-play"></i></a>
+                        <a href="https://fanvue.com/therealcm" target="_blank" rel="noopener noreferrer" title="Fanvue" aria-label="Visit Fanvue"><i class="fas fa-user-circle"></i></a>
+                        <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Youfanly" aria-label="Visit Youfanly"><i class="fas fa-star"></i></a>
+                        <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Finsta" aria-label="Visit Finsta"><i class="fas fa-camera"></i></a>
+                        <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Twitter" aria-label="Visit Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="preview-btn" data-video="https://x.com/caramellmocha69/status/1959342747002753139/video/1" title="Preview" aria-label="Preview video"><i class="fas fa-play"></i></a>
                     </div>
                 </div>
             </div>
             <div class="creator-card animate-on-scroll">
                 <div class="creator-img">
-                    <img src="https://pbs.twimg.com/media/GyKQHVrWgAAhMHe?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/media/GyKQHVrWgAAhMHe?format=jpg&name=small">
+                        <img src="https://pbs.twimg.com/media/GyKQHVrWgAAhMHe?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
+                    </picture>
                 </div>
                 <div class="creator-info">
                     <h3>Caramel Mocha</h3>
                     <p>Daily updates and interactive shows.</p>
                     <div class="creator-links">
-                        <a href="https://fanvue.com/therealcm" target="_blank" rel="noopener noreferrer" title="Fanvue"><i class="fas fa-user-circle"></i></a>
-                        <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Youfanly"><i class="fas fa-star"></i></a>
-                        <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Finsta"><i class="fas fa-camera"></i></a>
-                        <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="preview-btn" data-video="https://x.com/caramellmocha69/status/1930306048134348857/video/1" title="Preview"><i class="fas fa-play"></i></a>
+                        <a href="https://fanvue.com/therealcm" target="_blank" rel="noopener noreferrer" title="Fanvue" aria-label="Visit Fanvue"><i class="fas fa-user-circle"></i></a>
+                        <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Youfanly" aria-label="Visit Youfanly"><i class="fas fa-star"></i></a>
+                        <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Finsta" aria-label="Visit Finsta"><i class="fas fa-camera"></i></a>
+                        <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Twitter" aria-label="Visit Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="preview-btn" data-video="https://x.com/caramellmocha69/status/1930306048134348857/video/1" title="Preview" aria-label="Preview video"><i class="fas fa-play"></i></a>
                     </div>
                 </div>
             </div>
             <div class="creator-card animate-on-scroll">
                 <div class="creator-img">
-                    <img src="https://pbs.twimg.com/media/GyKQHV2X0AA00c3?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/media/GyKQHV2X0AA00c3?format=jpg&name=small">
+                        <img src="https://pbs.twimg.com/media/GyKQHV2X0AA00c3?format=jpg&name=large" alt="Caramel Mocha" loading="lazy">
+                    </picture>
                 </div>
                 <div class="creator-info">
                     <h3>Caramel Mocha</h3>
                     <p>Behind-the-scenes and exclusive videos.</p>
                     <div class="creator-links">
-                        <a href="https://fanvue.com/therealcm" target="_blank" rel="noopener noreferrer" title="Fanvue"><i class="fas fa-user-circle"></i></a>
-                        <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Youfanly"><i class="fas fa-star"></i></a>
-                        <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Finsta"><i class="fas fa-camera"></i></a>
-                        <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="preview-btn" data-video="https://x.com/caramellmocha69/status/1942584867985973491/video/1" title="Preview"><i class="fas fa-play"></i></a>
+                        <a href="https://fanvue.com/therealcm" target="_blank" rel="noopener noreferrer" title="Fanvue" aria-label="Visit Fanvue"><i class="fas fa-user-circle"></i></a>
+                        <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Youfanly" aria-label="Visit Youfanly"><i class="fas fa-star"></i></a>
+                        <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Finsta" aria-label="Visit Finsta"><i class="fas fa-camera"></i></a>
+                        <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" title="Twitter" aria-label="Visit Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="preview-btn" data-video="https://x.com/caramellmocha69/status/1942584867985973491/video/1" title="Preview" aria-label="Preview video"><i class="fas fa-play"></i></a>
                     </div>
                 </div>
             </div>
@@ -933,37 +991,46 @@
         <div class="content-grid">
             <div class="content-card animate-on-scroll">
                 <div class="content-thumbnail">
-                    <img src="https://pbs.twimg.com/media/GzAytXfXMAEXk89?format=jpg&name=medium" alt="Caramel Mocha's New Release" loading="lazy">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/media/GzAytXfXMAEXk89?format=jpg&name=small">
+                        <img src="https://pbs.twimg.com/media/GzAytXfXMAEXk89?format=jpg&name=medium" alt="Caramel Mocha's New Release" loading="lazy">
+                    </picture>
                 </div>
                 <div class="content-details">
                     <h3>Caramel Mocha's Exclusive New Release</h3>
                     <div class="content-meta">
                         <span>2 hours ago</span>
-                        <a href="#" class="btn">Watch Now <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="btn" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
             <div class="content-card animate-on-scroll">
                 <div class="content-thumbnail">
-                    <img src="https://pbs.twimg.com/amplify_video_thumb/1949481705305214976/img/fh6Bm_Nu2uIJTN50?format=jpg&name=360x360" alt="Caramel Mocha's Live Show" loading="lazy">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/amplify_video_thumb/1949481705305214976/img/fh6Bm_Nu2uIJTN50?format=jpg&name=small">
+                        <img src="https://pbs.twimg.com/amplify_video_thumb/1949481705305214976/img/fh6Bm_Nu2uIJTN50?format=jpg&name=360x360" alt="Caramel Mocha's Live Show" loading="lazy">
+                    </picture>
                 </div>
                 <div class="content-details">
                     <h3>Caramel Mocha's Live Show Recap</h3>
                     <div class="content-meta">
                         <span>4 hours ago</span>
-                        <a href="#" class="btn">Watch Now <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="btn" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
             <div class="content-card animate-on-scroll">
                 <div class="content-thumbnail">
-                    <img src="https://pbs.twimg.com/amplify_video_thumb/1944128677387583489/img/_E30Ur8iQkJrPfhW?format=jpg&name=360x360" alt="Caramel Mocha's BTS" loading="lazy">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://pbs.twimg.com/amplify_video_thumb/1944128677387583489/img/_E30Ur8iQkJrPfhW?format=jpg&name=small">
+                        <img src="https://pbs.twimg.com/amplify_video_thumb/1944128677387583489/img/_E30Ur8iQkJrPfhW?format=jpg&name=360x360" alt="Caramel Mocha's BTS" loading="lazy">
+                    </picture>
                 </div>
                 <div class="content-details">
                     <h3>Caramel Mocha's Behind-the-Scenes</h3>
                     <div class="content-meta">
                         <span>1 day ago</span>
-                        <a href="#" class="btn">Watch Now <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="btn" aria-label="Watch now">Watch Now <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -997,15 +1064,15 @@
             <h2>Secure Payment Options</h2>
             <p>Choose your preferred method to unlock premium content instantly.</p>
             <div class="payment-methods">
-                <div class="payment-method" data-method="bitcoin">
+                <div class="payment-method" data-method="bitcoin" aria-label="Pay with Bitcoin">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Bitcoin_logo.svg/1200px-Bitcoin_logo.svg.png" alt="Bitcoin">
                     <p>Bitcoin</p>
                 </div>
-                <div class="payment-method" data-method="mtn">
+                <div class="payment-method" data-method="mtn" aria-label="Pay with MTN Mobile Money">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/MTN_Logo.svg/1200px-MTN_Logo.svg.png" alt="MTN Mobile Money">
                     <p>MTN MoMo</p>
                 </div>
-                <div class="payment-method" data-method="vodafone">
+                <div class="payment-method" data-method="vodafone" aria-label="Pay with Vodafone Cash">
                     <img src="https://th.bing.com/th/id/OIP.RmSMkQWBrKLew0r4grT7mAHaDe?w=328&h=164&c=7&r=0&o=7&pid=1.7&rm=3" alt="Vodafone Cash">
                     <p>Vodafone Cash</p>
                 </div>
@@ -1015,7 +1082,7 @@
                 <form id="paymentForm">
                     <div class="form-group">
                         <label for="paymentMethod">Payment Method</label>
-                        <select id="paymentMethod" required>
+                        <select id="paymentMethod" required aria-label="Select payment method">
                             <option value="">Select payment method</option>
                             <option value="bitcoin">Bitcoin</option>
                             <option value="mtn">MTN Mobile Money</option>
@@ -1037,9 +1104,9 @@
                         <p>Send Bitcoin to the address below (Note: Use a secure, dynamic address in production):</p>
                         <img id="bitcoinQR" src="" alt="Bitcoin QR Code">
                         <p id="bitcoinAddress">bc1qexampleaddresshere1234567890</p>
-                        <p class="copy-address">Copy Address <i class="fas fa-copy"></i></p>
+                        <p class="copy-address" aria-label="Copy Bitcoin address">Copy Address <i class="fas fa-copy"></i></p>
                     </div>
-                    <button type="submit" class="btn">Proceed to Payment</button>
+                    <button type="submit" class="btn" aria-label="Proceed to payment">Proceed to Payment</button>
                     <div class="loading-spinner" id="loadingSpinner"></div>
                 </form>
             </div>
@@ -1053,20 +1120,19 @@
             <p>Subscribe to get instant alerts on new content from Caramel Mocha!</p>
             <form class="subscribe-form">
                 <input type="email" placeholder="Enter your email..." required aria-label="Email for subscription">
-                <button type="submit">Subscribe Now</button>
+                <button type="submit" aria-label="Subscribe">Subscribe Now</button>
             </form>
             <p class="telegram-cta">Join our <a href="https://t.me/caramelmocha" target="_blank" rel="noopener noreferrer">Telegram channel</a> for real-time updates!</p>
         </div>
     </section>
 
     <!-- Preview Modal -->
-    <div class="modal" id="previewModal" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal" id="previewModal" role="dialog" aria-labelledby="modalTitle" tabindex="0">
         <div class="modal-content">
             <span class="close-modal" aria-label="Close modal">&times;</span>
             <div class="modal-video-container">
-                <video controls autoplay id="modalVideo" aria-label="Preview video">
-                    Your browser does not support the video tag.
-                </video>
+                <iframe id="modalIframe" src="" frameborder="0" allowfullscreen aria-label="Preview video"></iframe>
+                <p id="modalError" style="display: none; color: red; text-align: center;">Failed to load video. Please try again.</p>
             </div>
         </div>
     </div>
@@ -1075,15 +1141,15 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="https://fanvue.com/therealcm" target="_blank" rel="noopener noreferrer"><i class="fas fa-user-circle"></i> Fanvue</a>
-                <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer"><i class="fas fa-star"></i> Youfanly</a>
-                <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer"><i class="fas fa-camera"></i> Finsta</a>
-                <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="#">Terms</a>
-                <a href="#">Privacy</a>
-                <a href="#">DMCA</a>
-                <a href="#">2257</a>
-                <a href="#">Contact</a>
+                <a href="https://fanvue.com/therealcm" target="_blank" rel="noopener noreferrer" aria-label="Visit Fanvue"><i class="fas fa-user-circle"></i> Fanvue</a>
+                <a href="https://youfanly.com/caramellmocha69" target="_blank" rel="noopener noreferrer" aria-label="Visit Youfanly"><i class="fas fa-star"></i> Youfanly</a>
+                <a href="https://finsta.app/caramellmocha69" target="_blank" rel="noopener noreferrer" aria-label="Visit Finsta"><i class="fas fa-camera"></i> Finsta</a>
+                <a href="https://x.com/caramellmocha69" target="_blank" rel="noopener noreferrer" aria-label="Visit Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#" aria-label="Terms">Terms</a>
+                <a href="#" aria-label="Privacy">Privacy</a>
+                <a href="#" aria-label="DMCA">DMCA</a>
+                <a href="#" aria-label="2257">2257</a>
+                <a href="#" aria-label="Contact">Contact</a>
             </div>
             <p class="copyright">© 2025 Caramel Mocha Promos. All rights reserved. 18+ only.</p>
         </div>
@@ -1104,31 +1170,55 @@
         // Preview Modal
         const previewBtns = document.querySelectorAll('.preview-btn');
         const modal = document.getElementById('previewModal');
-        const modalVideo = document.getElementById('modalVideo');
+        const modalIframe = document.getElementById('modalIframe');
+        const modalError = document.getElementById('modalError');
         const closeModal = document.querySelector('.close-modal');
 
         previewBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const videoSrc = btn.getAttribute('data-video');
-                modalVideo.src = videoSrc;
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
+                console.log('Attempting to load video:', videoSrc);
+                try {
+                    const postId = videoSrc.match(/status\/(\d+)/)[1];
+                    const embedSrc = `https://twitframe.com/show?url=https%3A%2F%2Fx.com%2Fcaramellmocha69%2Fstatus%2F${postId}`;
+                    modalIframe.src = embedSrc;
+                    modalError.style.display = 'none';
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    modal.focus(); // Improve accessibility
+                } catch (error) {
+                    console.error('Error loading video:', error);
+                    modalError.style.display = 'block';
+                    modalIframe.src = '';
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
             });
         });
 
         closeModal.addEventListener('click', () => {
             modal.style.display = 'none';
-            modalVideo.pause();
-            modalVideo.src = '';
+            modalIframe.src = '';
+            modalError.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
 
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
-                modalVideo.pause();
-                modalVideo.src = '';
+                modalIframe.src = '';
+                modalError.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Keyboard Accessibility for Modal
+        modal.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.style.display = 'none';
+                modalIframe.src = '';
+                modalError.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
@@ -1232,28 +1322,6 @@
         }, { threshold: 0.2 });
 
         animateElements.forEach(element => observer.observe(element));
-
-        // Lazy Load Videos
-        const videos = document.querySelectorAll('video');
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.play().catch(() => {});
-                } else {
-                    entry.target.pause();
-                }
-            });
-        }, { threshold: 0.5 });
-
-        videos.forEach(video => videoObserver.observe(video));
-
-        // Login Placeholder
-        const loginLink = document.querySelector('a[href="#login"]');
-        loginLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Login functionality coming soon! Please subscribe or contact support for access.');
-        });
     </script>
 </body>
-
 </html>
